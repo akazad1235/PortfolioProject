@@ -290,12 +290,11 @@
                                     <div class="tab-content pl-lg-4" id="pills-tabContent">
                                         <div class="tab-pane fade show active" id="pills-cloud" role="tabpanel" aria-labelledby="pills-cloud-tab">
                                             @foreach($skill as $row)
-                                            @if(1 == $row->header_id)
+                                            @if( 1 == $row->header_id )
                                             <div class="progress-box mt-4 pt-2">
                                                 <h6 class="font-weight-normal">
                                                     
                                                         {{$row->title}}
-                                                    
                                                 </h6>
 
                                                 <div class="progress">
@@ -305,7 +304,9 @@
                                                 </div>
                                                 
 
-                                            </div><!--end process box-->@endif
+                                            </div><!--end process box-->
+
+                                            @endif
                                             @endforeach
                                            
                                         </div><!--end teb pane-->
@@ -369,20 +370,26 @@
                 <div class="row mt-4 pt-2">
                     <div class="col-lg-12">
                         <ul class="portfolioFilter text-center mb-0 list-unstyled">
+                            
                             <li class="list-inline-item mb-3"><a href="#" data-filter="*" class="active text-dark mr-2 py-2 px-3 rounded">All</a></li>
-                            <li class="list-inline-item mb-3"><a href="#" data-filter=".natural" class="text-dark mr-2 py-2 px-3 rounded">Natural</a></li>
+                            @foreach($projectCat as $row)
+                            <li class="list-inline-item mb-3"><a href="#" data-filter=".{{$row->category_name}}" class="text-dark mr-2 py-2 px-3 rounded">{{$row->category_name}}</a></li>
+                            @endforeach
+
+                            <!-- <li class="list-inline-item mb-3"><a href="#" data-filter=".natural" class="text-dark mr-2 py-2 px-3 rounded">Natural</a></li>
                             <li class="list-inline-item mb-3"><a href="#" data-filter=".creative" class="text-dark mr-2 py-2 px-3 rounded">Creative</a></li>
                             <li class="list-inline-item mb-3"><a href="#" data-filter=".personal" class="text-dark mr-2 py-2 px-3 rounded">Personal</a></li>
-                            <li class="list-inline-item mb-3"><a href="#" data-filter=".photography" class="text-dark mr-2 py-2 px-3 rounded">Photography</a></li>
+                            <li class="list-inline-item mb-3"><a href="#" data-filter=".photography" class="text-dark mr-2 py-2 px-3 rounded">Photography</a></li> -->
                         </ul>
                     </div><!--end col-->
                 </div><!--end row-->
 
                 <div class="portfolioContainer row">
-                    <div class="col-lg-4 col-md-6 mt-4 pt-2 natural personal">
+                @foreach($portfolio as $row)
+                    <div class="col-lg-4 col-md-6 mt-4 pt-2 {{$row->projectcategory->category_name}} personal">
                         <div class="portfolio-box rounded position-relative overflow-hidden">
                             <div class="portfolio-box-img position-relative overflow-hidden">
-                                <img src="images/portfolio/1.jpg" class="img-fluid" alt="member-image">
+                                <img src="{{asset('public/admin/images/portfolio/'.$row->image)}}" class="img-fluid" alt="member-image">
                                 <div class="overlay-work">
                                     <div class="work-content text-center">
                                         <a href="images/portfolio/1.jpg" class="text-light work-icon bg-dark d-inline-block rounded-pill mfp-image"><i data-feather="camera" class="fea icon-sm image-icon"></i></a>
@@ -390,96 +397,14 @@
                                 </div>
                             </div>
                             <div class="gallary-title py-4 text-center">
-                                <h5><a href="page-portfolio-detail.html" class="title text-dark">The Usefulness</a></h5>
-                                <span>Photography</span>
+                                <h5><a href="page-portfolio-detail.html" class="title text-dark">{{$row->project_name}}</a></h5>
+                                <span>{{$row->projectcategory->category_name}}</span>
                             </div>
                         </div>
                     </div><!--end col-->
+                @endforeach
 
-                    <div class="col-lg-4 col-md-6 mt-4 pt-2 creative personal photography">
-                        <div class="portfolio-box rounded position-relative overflow-hidden">
-                            <div class="portfolio-box-img position-relative overflow-hidden">
-                                <img src="images/portfolio/2.jpg" class="img-fluid" alt="member-image">
-                                <div class="overlay-work">
-                                    <div class="work-content text-center">
-                                        <a href="http://vimeo.com/287684225" class="play-btn video-play-icon text-light work-icon bg-dark d-inline-block rounded-pill"><i data-feather="video" class="fea icon-sm image-icon"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gallary-title py-4 text-center">
-                                <h5><a href="page-portfolio-detail.html" class="title text-dark">The Nonsensical content</a></h5>
-                                <span>Illustrations</span>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-lg-4 col-md-6 mt-4 pt-2 natural creative">
-                        <div class="portfolio-box rounded position-relative overflow-hidden">
-                            <div class="portfolio-box-img position-relative overflow-hidden">
-                                <img src="images/portfolio/4.jpg" class="img-fluid" alt="member-image">
-                                <div class="overlay-work">
-                                    <div class="work-content text-center">
-                                        <a href="images/portfolio/4.jpg" class="text-light work-icon bg-dark d-inline-block rounded-pill mfp-image"><i data-feather="camera" class="fea icon-sm image-icon"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gallary-title py-4 text-center">
-                                <h5><a href="page-portfolio-detail.html" class="title text-dark">Prevents Patterns</a></h5>
-                                <span>Corrporate</span>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-lg-4 col-md-6 mt-4 pt-2  personal photography">
-                        <div class="portfolio-box rounded position-relative overflow-hidden">
-                            <div class="portfolio-box-img position-relative overflow-hidden">
-                                <img src="images/portfolio/6.jpg" class="img-fluid" alt="member-image">
-                                <div class="overlay-work">
-                                    <div class="work-content text-center">
-                                        <a href="images/portfolio/6.jpg" class="text-light work-icon bg-dark d-inline-block rounded-pill mfp-image"><i data-feather="camera" class="fea icon-sm image-icon"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gallary-title py-4 text-center">
-                                <h5><a href="page-portfolio-detail.html" class="title text-dark">The Advantageous</a></h5>
-                                <span>Graphics</span>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-lg-4 col-md-6 mt-4 pt-2 creative photography">
-                        <div class="portfolio-box rounded position-relative overflow-hidden">
-                            <div class="portfolio-box-img position-relative overflow-hidden">
-                                <img src="images/portfolio/3.jpg" class="img-fluid" alt="member-image">
-                                <div class="overlay-work">
-                                    <div class="work-content text-center">
-                                        <a href="http://vimeo.com/287684225" class="play-btn video-play-icon text-light work-icon bg-dark d-inline-block rounded-pill"><i data-feather="video" class="fea icon-sm image-icon"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gallary-title py-4 text-center">
-                                <h5><a href="page-portfolio-detail.html" class="title text-dark">Automatic Recognition</a></h5>
-                                <span>Web Design</span>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-lg-4 col-md-6 mt-4 pt-2 natural creative">
-                        <div class="portfolio-box rounded position-relative overflow-hidden">
-                            <div class="portfolio-box-img position-relative overflow-hidden">
-                                <img src="images/portfolio/5.jpg" class="img-fluid" alt="member-image">
-                                <div class="overlay-work">
-                                    <div class="work-content text-center">
-                                        <a href="images/portfolio/5.jpg" class="text-light work-icon bg-dark d-inline-block rounded-pill mfp-image"><i data-feather="camera" class="fea icon-sm image-icon"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gallary-title py-4 text-center">
-                                <h5><a href="page-portfolio-detail.html" class="title text-dark"> Ius Dissentiunt </a></h5>
-                                <span>Devlopment</span>
-                            </div>
-                        </div>
-                    </div><!--end col-->
+                  
                 </div><!-- End row -->
 
                 <div class="row">
@@ -912,32 +837,7 @@
         </a>
         <!-- Back to top -->
 
-        <!-- Style switcher -->
-        <div id="style-switcher" class="shadow" style="left: 0px;" class="p-3 pt-2 pb-2">
-            <ul class="pattern mb-0">
-                <li>
-                    <a class="default" href="#"></a>
-                </li>
-                <li>
-                    <a class="blue" href="#"></a>
-                </li>
-                <li>
-                    <a class="light-green" href="#"></a>
-                </li>   
-                <li>
-                    <a class="yellow" href="#"></a>
-                </li>   
-                <li>
-                    <a class="light-yellow" href="#"></a>
-                </li>   
-                <li>
-                    <a class="purple" href="#"></a>
-                </li>   
-            </ul>
-            <div class="bottom">
-                <a href="#" class="settings shadow"><i class="mdi mdi-settings mdi-spin text-primary"></i></a>
-            </div>
-        </div>
-        <!-- end Style switcher -->
+       
+        
 @endsection
 

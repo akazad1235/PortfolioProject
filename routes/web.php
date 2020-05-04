@@ -62,6 +62,25 @@ Route::prefix('skill')->name('skill.')->group(function(){
 	Route::get('/delete/{id}', 'Admin\SkillController@destroy')->name('delete'); 
 
 });
+Route::prefix('projectcategory')->name('projectcategory.')->group(function(){
+	Route::get('/manage', 'Admin\CategoryProjectController@index')->name('manage');
+	Route::get('/create', 'Admin\CategoryProjectController@create')->name('create');
+	Route::post('/store', 'Admin\CategoryProjectController@store')->name('store');
+	Route::get('/edit/{id}', 'Admin\CategoryProjectController@edit')->name('edit');
+	Route::post('/update/{id}', 'Admin\CategoryProjectController@update')->name('update'); 
+	Route::get('/delete/{id}', 'Admin\CategoryProjectController@destroy')->name('delete');
+
+});
+Route::prefix('portfolio')->name('portfolio.')->group(function(){
+	Route::get('/manage', 'Admin\PortfolioController@index')->name('manage');
+	Route::get('/create', 'Admin\PortfolioController@create')->name('create');
+	Route::post('/store', 'Admin\PortfolioController@store')->name('store');
+	// Route::get('/edit/{id}', 'Admin\PortfolioController@edit')->name('edit');
+	// Route::post('/update/{id}', 'Admin\PortfolioController@update')->name('update'); 
+	// Route::get('/delete/{id}', 'Admin\PortfolioController@destroy')->name('delete');
+
+});
+
 
 
 });

@@ -45,6 +45,22 @@
                                         <li class="{{request()->is('skill/create','skill/create/*') ? 'active-item':''}}"><a href="{{route('skill.create')}}">Add</a></li>
                                     </ul>
                                 </li>
+                                 <!--Project Category-->
+                                 <li class="has-child-item {{request()->is('projectcategory/*') ? 'open-item active-item':''}} close-item">
+                                    <a><i class="fa fa-cubes" aria-hidden="true"></i><span>Project Category</span></a>
+                                    <ul class="nav child-nav level-1">
+                                        <li class="{{request()->is('projectcategory/manage','projectcategory/manage/*') ? 'active-item':''}}"><a href="{{route('projectcategory.manage')}}">Manage</a></li>
+                                        <li class="{{request()->is('projectcategory/create','projectcategory/create/*') ? 'active-item':''}}"><a href="{{route('projectcategory.create')}}">Add</a></li>
+                                    </ul>
+                                </li>
+                                 <!--PortFolio-->
+                                 <li class="has-child-item {{request()->is('portfolio/*') ? 'open-item active-item':''}} close-item">
+                                    <a><i class="fa fa-cubes" aria-hidden="true"></i><span>Portfolio</span></a>
+                                    <ul class="nav child-nav level-1">
+                                        <li class="{{request()->is('portfolio/manage','portfolio/manage/*') ? 'active-item':''}}"><a href="{{route('portfolio.manage')}}">Manage</a></li>
+                                        <li class="{{request()->is('portfolio/create','portfolio/create/*') ? 'active-item':''}}"><a href="{{route('portfolio.create')}}">Add</a></li>
+                                    </ul>
+                                </li>
 
                                
                             </ul>

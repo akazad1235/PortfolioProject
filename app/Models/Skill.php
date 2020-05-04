@@ -10,6 +10,6 @@ class Skill extends Model
     protected $fillable = ['header_id','title', 'value', 'status',];
 
     public function Skillheader(){
-    	return $this->belongsTo(Skillheader::class);
+    	return $this->belongsTo(Skillheader::class, 'header_id', 'id');
     }
 }

@@ -1,18 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Models\Home;
-use App\Models\Exprerience;
-use App\Models\Service;
-use App\Models\participation;
-use App\Models\Skill;
-use App\Models\Skillheader;
-use App\Models\Projectcategory;
+use App\Http\Controllers\Controller;
 use App\Models\Portfolio;
+use Illuminate\Http\Request;
+use App\Models\Projectcategory;
 
-class websiteHomeController extends Controller
+class PortfolioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,36 +15,11 @@ class websiteHomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $home = Home::find(2);
-        $experience = Exprerience::get();
-        $service = Service::get();
-        $participation = participation::get();
-        $skillheader =Skillheader::get();
-        $skill = Skill::with('Skillheader')->get();  
-        $portfolio =  Portfolio::with('Projectcategory')->get(); 
-       // return $portfolio;
-        $projectCat = Projectcategory::get();
-       
-
-        return view('website.home', [
-            'home'          => $home,
-            'experience'    => $experience,
-            'service'       => $service,
-            'participation' => $participation,
-            'skill'         => $skill,
-            'skillheader'   => $skillheader,
-            'projectCat'    => $projectCat,
-            'portfolio'    => $portfolio,
-
-        ]);
+    {
+        $getdata =  Portfolio::with('Projectcategory')->get();
+          //return $getdata;
+        return view('admin.pages.portfolio.manage', compact('getdata'));
     }
-
-    /* public function service(){
-
-        $allEx = Exprerience::get();
-        return view('website.home', compact('allEx'));
-    } */
 
     /**
      * Show the form for creating a new resource.
@@ -58,7 +28,8 @@ class websiteHomeController extends Controller
      */
     public function create()
     {
-        //
+        $getCatData=Projectcategory::get();
+        return view('admin.pages.portfolio.create', compact('getCatData'));
     }
 
     /**
@@ -69,7 +40,22 @@ class websiteHomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $image    = $request->file('image');
+      $fileName = rand(0, 999999999) . '_' . date('Ymdhis') . '_' . rand(99999, 999999999) . '.' . $image->getClientOriginalExtension();
+      //return $fileName;
+      if ($image->isValid()) {
+        if ($image->getMimeType() === "image/png" || $image->getMimeType() === "image/jpeg" ) {
+            $image->storeAs('portfolio', $fileName);
+            }
+            }
+        Portfolio::create([
+            'category_id' => $request->category_id,
+            'project_name' => $request->project_name,
+            'image' => $fileName,
+            'status' => $request->status,
+        ]);
+        setMessage('success', 'Portfolio added succes');
+        return redirect()->back();
     }
 
     /**

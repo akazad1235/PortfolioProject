@@ -15,7 +15,12 @@ class CreatePortfoliosTable extends Migration
     {
         Schema::create('portfolios', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id');
+            $table->string('project_name');
+            $table->string('image');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
+            $table->foreign('category_id')->references('id')->on('projectcategories')->onDelete('cascade');
         });
     }
 
